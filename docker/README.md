@@ -50,7 +50,7 @@ You can generate and base64-encode the DKIM signing key and Let's Encrypt key li
 ```bash
 # set to signing_key or lets_encrypt_key
 KEYNAME=signing_key
-# set to 1024 if your DNS provider has trouble with long DKIM signatures
+# set to 1024 only if your DNS provider has trouble with long DKIM signatures
 # set to 4096 for Let's Encrypt and if your DNS provider can handle such a long signature
 KEYLENGTH=2048
 
@@ -77,6 +77,15 @@ general:
     - "8.8.8.8"
     - "8.8.4.4"
 ```
+
+## Behaviour
+
+On startup, the following actions will be performed:
+
+- Check if MariaDB is up. If it is not, exit with status code `1`
+- Check if the `postal` schema exists in MariaDB. If it does not, create the `postal` database.
+- Check if Postal's database is initialized. If it is not, run `postal initialize`.
+- Run `postal start`
 
 ## Attribution
 
