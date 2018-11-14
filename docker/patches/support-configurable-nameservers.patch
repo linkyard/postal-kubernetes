@@ -1,0 +1,25 @@
+I'm not sure. It seems like Ruby does not like CoreDNS
+--- a/opt/postal/app/config/postal.defaults.yml	2018-11-10 09:56:08.000000000 +0100
++++ b/opt/postal/app/config/postal.defaults.yml	2018-11-10 09:56:23.000000000 +0100
+@@ -13,6 +13,9 @@
+   exception_url:
+   maximum_delivery_attempts: 18
+   use_local_ns_for_domains: false
++  # nameservers:
++  #   - "8.8.8.8"
++  #   - "8.8.4.4"
+
+ web_server:
+   bind_address: 127.0.0.1
+--- a/opt/postal/app/app/models/domain.rb	2018-11-10 09:56:08.000000000 +0100
++++ b/opt/postal/app/app/models/domain.rb	2018-11-10 09:56:23.000000000 +0100
+@@ -142,6 +142,9 @@
+
+   def get_nameservers
+     local_resolver = Resolv::DNS.new
++    if Postal.config.general.key?('nameservers') and Postal.config.general.nameservers.is_a?(Array)
++      local_resolver = Resolv::DNS.new(:nameserver => Postal.config.general.nameservers)
++    end
+     ns_records = []
+     parts = name.split('.')
+     (parts.size - 1).times do |n|

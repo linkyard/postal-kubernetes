@@ -1,0 +1,12 @@
+native mysql 0.4.4 does not compile against mariadb-client from current alpine
+--- a/opt/postal/app/Gemfile.lock	2018-11-10 09:59:05.000000000 +0100
++++ b/opt/postal/app/Gemfile.lock	2018-11-10 09:58:55.000000000 +0100
+@@ -128,7 +128,7 @@
+       rack (>= 1.4)
+     multi_xml (0.5.5)
+     multipart-post (2.0.0)
+-    mysql2 (0.4.4)
++    mysql2 (0.4.10)
+     nifty-utils (1.1.7)
+     nilify_blanks (1.2.1)
+       activerecord (>= 3.0.0)

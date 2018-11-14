@@ -1,0 +1,12 @@
+the variable $USER might be unset on /bin/sh
+--- a/opt/postal/app/bin/postal	2018-11-10 09:56:08.000000000 +0100
++++ b/opt/postal/app/bin/postal	2018-11-10 09:56:23.000000000 +0100
+@@ -13,7 +13,7 @@
+
+ # If we we can sudo and the current user isn't postal, then automatically
+ # run commands as the postal user
+-if [ $SHOULD_SUDO == "yes" ] && [ $USER != "postal" ]; then
++if [ $SHOULD_SUDO == "yes" ] && [ "$(whoami)" != "postal" ]; then
+     run() {
+         HOME=/opt/postal
+         eval "sudo -u postal $@"

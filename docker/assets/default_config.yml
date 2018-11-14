@@ -1,0 +1,10 @@
+fast_server:
+  bind_address: 0.0.0.0
+
+web_server:
+  bind_address: 0.0.0.0
+
+general:
+  nameservers:
+    - "8.8.8.8"
+    - "8.8.4.4"
