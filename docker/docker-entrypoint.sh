@@ -69,8 +69,8 @@ for f in cron.log message_requeuer.log puma.log rails.log smtp_server.log worker
 done
 
 set +e
-# in init-container auslagern
-if ! mysqladmin -s ping -h ${MARIADB_HOST} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD}
+# do this in an init-container instead of failing here
+if ! mysqladmin -s ping -h "${MARIADB_HOST}" --user="${MARIADB_USER}" --password="${MARIADB_PASSWORD}"
 then
   echo "error: cannot ping mariadb"
   exit 1
