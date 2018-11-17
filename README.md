@@ -5,7 +5,7 @@ A docker-image and helm-chart to deploy [Postal](https://postal.atech.media/) on
 Please refer to the individual documentation for the docker-image and the helm-chart:
 
 - [docker-image](docker/README.md)
-- [helm-chart](helm/README.md)
+- [helm-chart](helm/postal/README.md)
 
 ## Roadmap
 
