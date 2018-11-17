@@ -5,6 +5,19 @@ if [ -z "${MARIADB_HOST}" ]; then echo "error: MARIADB_HOST is unset"; exit 1; f
 if [ -z "${MARIADB_USER}" ]; then echo "error: MARIADB_USER is unset"; exit 1; fi
 if [ -z "${MARIADB_PASSWORD}" ]; then echo "error: MARIADB_PASSWORD is unset"; exit 1; fi
 
+if [ "$1" = "wait-for-mariadb" ]; then
+  set +e
+  while (true); do
+    if ! mysqladmin -s ping -h "${MARIADB_HOST}" --user="${MARIADB_USER}" --password="${MARIADB_PASSWORD}"
+    then
+      echo "maridb ${MARIADB_HOST} is not ready"
+      sleep 1
+    else
+      exit 0
+    fi
+  done
+fi
+
 if [ -z "${RABBITMQ_HOST}" ]; then echo "error: RABBITMQ_HOST is unset"; exit 1; fi
 if [ -z "${RABBITMQ_USER}" ]; then echo "error: RABBITMQ_USER is unset"; exit 1; fi
 if [ -z "${RABBITMQ_PASSWORD}" ]; then echo "error: RABBITMQ_PASSWORD is unset"; exit 1; fi
@@ -52,7 +65,7 @@ fi
 set -u
 
 GEM_HOME=/opt/postal/vendor/bundle/ruby/2.3.0/ ruby /opt/linkyard/write_config.rb
-rm ${SECRET_YAML}
+rm ${SECRET_YAML} /tmp/user.yml
 
 onSigTerm() {
   postal stop
@@ -68,18 +81,10 @@ for f in cron.log message_requeuer.log puma.log rails.log smtp_server.log worker
   touch /opt/postal/log/$f
 done
 
-set +e
-# do this in an init-container instead of failing here
-if ! mysqladmin -s ping -h "${MARIADB_HOST}" --user="${MARIADB_USER}" --password="${MARIADB_PASSWORD}"
-then
-  echo "error: cannot ping mariadb"
-  exit 1
-fi
-
 if [ "$(echo "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'postal'" | mysql -B -h "${MARIADB_HOST}" --user="${MARIADB_USER}" --password="${MARIADB_PASSWORD}" | grep -c -v SCHEMA_NAME)" -ne 1 ]; then
   set -e
   echo "Creating database"
-  echo "CREATE DATABASE postal CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql -B -h ${MARIADB_HOST} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD}
+  echo "CREATE DATABASE postal CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql -B -h "${MARIADB_HOST}" --user="${MARIADB_USER}" --password="${MARIADB_PASSWORD}"
   set +e
 fi
 
