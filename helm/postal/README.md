@@ -19,10 +19,16 @@ This chart bootstraps a deployment of Postal, MariaDB and RabbitMQ on a
 
 ## Installing the Chart
 
-To install the chart with the release name my-release:
+To install the chart with the release name `my-release`, add the linkyard helm charts repository:
 
 ```console
-helm install --name my-release stable/postal
+helm repo add linkyard http://charts.linkyard.ch
+```
+
+and install the chart:
+
+```console
+helm install --name my-release linkyard/postal
 ```
 
 The command deploys postal on the Kubernetes cluster in the default confiugraiotn. The [configuration](#confguration)
