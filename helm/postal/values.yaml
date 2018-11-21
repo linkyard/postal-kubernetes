@@ -36,7 +36,7 @@ postal:
     ingress:
       ## Hostname for Postal's web component
       ##
-      # hostName: 
+      # hostname: 
 
       ## Enable ingress
       ##
@@ -81,7 +81,7 @@ postal:
   smtp:
     ## Hostname for Postal's SMTP server
     ##
-    # hostName: 
+    # hostname: 
 
     ## What kind of service the SMTP server is exposed as
     ##

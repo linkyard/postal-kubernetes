@@ -14,13 +14,13 @@ spec:
   issuerRef:
     name: {{ required "postal.web.ingress.certManager.issuerName is required" .Values.postal.web.ingress.certManager.issuerName }}
     kind: {{ required "postal.web.ingress.certManager.issuerKind is required" .Values.postal.web.ingress.certManager.issuerKind }}
-  commonName: {{ required "postal.web.ingress.hostName is required" .Values.postal.web.ingress.hostName }}
+  commonName: {{ required "postal.web.ingress.hostname is required" .Values.postal.web.ingress.hostname }}
   dnsNames:
-  - {{ required "postal.web.ingress.hostName is required" .Values.postal.web.ingress.hostName }}
+  - {{ required "postal.web.ingress.hostname is required" .Values.postal.web.ingress.hostname }}
   acme:
     config:
     - http01:
         ingressClass: {{ .Values.postal.web.ingress.certManager.ingressClass }}
       domains:
-      - {{ required "postal.web.ingress.hostName is required" .Values.postal.web.ingress.hostName }}
+      - {{ required "postal.web.ingress.hostname is required" .Values.postal.web.ingress.hostname }}
 {{- end }}

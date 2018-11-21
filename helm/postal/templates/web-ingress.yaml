@@ -15,7 +15,7 @@ spec:
   {{- if .Values.postal.web.ingress.tlsEnabled }}
   tls:
   - hosts:
-    - {{ required "postal.web.ingress.hostName is required " .Values.postal.web.ingress.hostName }}
+    - {{ required "postal.web.ingress.hostname is required " .Values.postal.web.ingress.hostname }}
     {{- if .Values.postal.web.existingTlsSecret }}
     secretName: {{ .Values.postal.web.existingTlsSecret }}
     {{- else }}
@@ -23,7 +23,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-  - host: {{ required "postal.web.ingress.hostName is required " .Values.postal.web.ingress.hostName }}
+  - host: {{ required "postal.web.ingress.hostname is required " .Values.postal.web.ingress.hostname }}
     http:
       paths:
       - path: /
