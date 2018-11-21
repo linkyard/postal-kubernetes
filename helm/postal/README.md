@@ -92,6 +92,7 @@ The following table lists the configurable parameters of the postal chart and th
 Parameter | Description | Default
 --- | --- | ---
 `postal.nameOverride` | override the name of the chart | ``
+`postal.config` | A postal configuration yaml to apply on top of postal's default configuration. See [Postal's default configuration](https://github.com/atech/postal/blob/master/config/postal.defaults.yml) for available options. | `{}`
 `postal.image` | postal container image repository | `linkyard/postal`
 `postal.imageTag` | postal container image tag | `latest`
 `postal.imagePullPolicy` | postal container image pull policy | `Always`

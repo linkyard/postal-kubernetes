@@ -7,6 +7,10 @@ postal:
   ##
   # nameOverride:
 
+  ## A postal configuration yaml to apply on top of postal's default configuration
+  ##
+  # config: {}
+
   ## Postal image.
   ##
   image: linkyard/postal
