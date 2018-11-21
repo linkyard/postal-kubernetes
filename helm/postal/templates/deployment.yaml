@@ -26,7 +26,8 @@ spec:
       initContainers:
       - name: wait-for-mariadb
         image: "{{ .Values.postal.image }}:{{ .Values.postal.imageTag }}"
-        args: wait-for-mariadb
+        args: 
+        - wait-for-mariadb
         imagePullPolicy: "{{ .Values.postal.imagePullPolicy }}"
         env:
         - name: MARIADB_HOST
