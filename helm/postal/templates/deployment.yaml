@@ -104,6 +104,8 @@ spec:
               key: letsEncryptKey      
         - name: USER_CONFIG_PATH
           value: /var/run/postal-config/postalConfig
+        resources:
+{{ toYaml .Values.resources | indent 10 }}          
         ports:
         - name: web
           containerPort: 5000

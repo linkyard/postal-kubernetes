@@ -21,6 +21,11 @@ postal:
   ##
   imagePullPolicy: Always
 
+  ## Configure resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources: {}
+
   ## Configuration for Postal's web component
   ##
   web:

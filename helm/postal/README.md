@@ -95,6 +95,7 @@ Parameter | Description | Default
 `postal.image` | postal container image repository | `linkyard/postal`
 `postal.imageTag` | postal container image tag | `latest`
 `postal.imagePullPolicy` | postal container image pull policy | `Always`
+`postal.resources` | CPU/Memory resource requests/limits  | `{}`
 `postal.signingKey` | RSA private key in PEM format used for DKIM signing. Change this from the default! | see [values.yaml](values.yaml)
 `postal.railsSecretKey` | The secret key for rails. Change this from the default! | see [values.yaml](values.yaml)
 `postal.letsEncryptKey` | RSA private key in PEM format. Used by Postal to acquire and renew certificates for the click-tracking-server from Let's Encrypt. Change this from the default! | see [values.yaml](values.yaml)
