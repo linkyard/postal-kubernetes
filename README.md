@@ -7,6 +7,11 @@ Please refer to the individual documentation for the docker-image and the helm-c
 - [docker-image](docker/README.md)
 - [helm-chart](helm/postal/README.md)
 
+Getting the Docker image and helm chart:
+
+- The docker-image is available on Docker Hub: [linkyard/postal](https://hub.docker.com/r/linkyard/postal/)
+- The helm chart is available at [charts.linkyard.ch](https://charts.linkyard.ch)
+
 ## Roadmap
 
 - Contribute our little fixes to upstream
