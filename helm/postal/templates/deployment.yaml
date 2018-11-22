@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "postal.fullname" . }}
+  name: {{ template "postal.fullname" . }}-postal
   labels:
     app: {{ template "postal.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
