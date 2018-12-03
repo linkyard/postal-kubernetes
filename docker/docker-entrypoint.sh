@@ -74,6 +74,29 @@ onSigTerm() {
   ps xuaf | grep sleep | grep -v grep | xargs -r kill  
 }
 
+CERT_SHA=""
+checkSmtpCertificate() {
+  echo "Checking for renewed SMTP certificate"
+  CERT="$(grep "tls_certificate_path" /opt/postal/config/postal.yml  | awk '{print $2}' | sed -e 's:"::g')"
+  if [ ! -z "${CERT}" ] && [ -r "${CERT}" ]; then
+    CURRENT_SHA="$(sha512sum "${CERT}" | awk '{print $1}')"
+    if [ -z "${CERT_SHA}" ]; then
+      CERT_SHA="${CURRENT_SHA}"
+    else
+      if [ "${CERT_SHA}" != "${CURRENT_SHA}" ]; then
+        CERT_SHA="${CURRENT_SHA}"
+        echo "SMTP certificate was renewed. Restarting SMTP server"
+        # shellcheck disable=SC2009
+        ps xauf | grep "\\[postal\\] smtp" | grep -v grep | awk '{print $2}' | xargs -r kill -s SIGUSR1
+      else
+        echo "No change in the SMTP certificate detected"
+      fi
+    fi
+  else
+    echo "No certificate found or certificate not readable"
+  fi
+}
+
 # shellcheck disable=SC2039
 trap onSigTerm SIGHUP SIGINT SIGQUIT SIGTERM
 
@@ -103,9 +126,16 @@ fi
 
 tail -qF /opt/postal/log/*.log &
 
+LAST_SMTP_CHECK="$(date +%s)"
 while (true); do
   if [ -e /tmp/.stop-sleeping ]; then
     break
   fi
   sleep 5
+  # shellcheck disable=SC2039
+  let SINCE_LAST_SMTP_CHECK="$(date +%s)-${LAST_SMTP_CHECK}"
+  if [ ${SINCE_LAST_SMTP_CHECK} -gt 3600 ]; then
+    LAST_SMTP_CHECK="$(date +%s)"
+    checkSmtpCertificate
+  fi
 done
