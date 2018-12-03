@@ -1,5 +1,5 @@
 name: postal
-version: 0.0.5
+version: 0.1.0
 home: https://github.com/linkyard/postal-kubernetes
 description: A complete and fully featured mail server
 keywords:
