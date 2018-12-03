@@ -18,7 +18,7 @@ postal:
   ## Postal image version.
   ## ref: https://hub.docker.com/r/linkyard/postal/tags/
   ##
-  imageTag: "latest"
+  imageTag: "1.0.0"
 
   ## Specify a imagePullPolicy: 'Always' if imageTag is 'latest', else set to 'IfNotPresent'.
   ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images

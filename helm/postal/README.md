@@ -94,7 +94,7 @@ Parameter | Description | Default
 `postal.nameOverride` | override the name of the chart | ``
 `postal.config` | A postal configuration yaml to apply on top of postal's default configuration. See [Postal's default configuration](https://github.com/atech/postal/blob/master/config/postal.defaults.yml) for available options. | `{}`
 `postal.image` | postal container image repository | `linkyard/postal`
-`postal.imageTag` | postal container image tag | `latest`
+`postal.imageTag` | postal container image tag | `1.0.0`
 `postal.imagePullPolicy` | postal container image pull policy | `Always`
 `postal.resources` | CPU/Memory resource requests/limits  | `{}`
 `postal.signingKey` | RSA private key in PEM format used for DKIM signing. Change this from the default! | see [values.yaml](values.yaml)
