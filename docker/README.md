@@ -1,6 +1,6 @@
 # Docker-Image for Postal
 
-This docker-image is based on [ruby:2.3-alpine](https://hub.docker.com/_/ruby/) and uses the [latest.tgz](https://postal.atech.media/packages/stable/latest.tgz) package published by aTech Media.
+This docker-image is based on [ruby:2.3-alpine](https://hub.docker.com/_/ruby/) and uses packages published by aTech Media.
 
 Postal runs as user `postal` with uid `20000` and group id `20000`, exposed ports are `25` (SMTP) and `5000` (Postal web UI). Logs are printed to standard-out and saved as files in `/opt/postal/log` (log-rotation as per Postal's defaults).
 

@@ -9,7 +9,7 @@ RUN set -ex \
   && mkdir -p /opt/postal/app /opt/postal/config /opt/postal/log \
   && addgroup -g 20000 -S postal \
   && adduser -u 20000 -S -G postal -h /opt/postal -s /bin/bash postal \
-  && wget https://postal.atech.media/packages/stable/latest.tgz -O - | tar zxpv -C /opt/postal/app \
+  && wget https://postal.atech.media/packages/stable/postal-1.0.0-67d0f6514d.tgz -O - | tar zxpv -C /opt/postal/app \
   && chown -R postal:postal /opt/postal \
   && ln -s /opt/postal/app/bin/postal /usr/bin/postal \
   && for patch in $(ls /tmp/patches); do cat /tmp/patches/${patch} | patch -p1; done \
