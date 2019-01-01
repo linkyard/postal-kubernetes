@@ -71,7 +71,7 @@ onSigTerm() {
   postal stop
   touch /tmp/.stop-sleeping
   # shellcheck disable=SC2009
-  ps xuaf | grep sleep | grep -v grep | xargs -r kill  
+  pkill sleep
 }
 
 CERT_SHA=""
