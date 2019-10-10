@@ -59,9 +59,10 @@ postal:
         ##
         enabled: true
 
-        ## Ingress class to use for HTTP01 challenge
+        ## Arbitrary labels to add to the certificate
         ##
-        ingressClass: nginx
+        labels: {}
+        #  use-cloudflare-solver: "true"
 
         ## Name of the issuer
         ##
@@ -96,9 +97,10 @@ postal:
       ##
       enabled: true
 
-      ## Ingress class to use for HTTP01 challenge
+      ## Arbitrary labels to add to the certificate
       ##
-      ingressClass: nginx
+      labels: {}
+      #  use-cloudflare-solver: "true"
 
       ## Name of the issuer
       ##

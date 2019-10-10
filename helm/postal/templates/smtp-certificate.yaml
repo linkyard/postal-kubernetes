@@ -9,18 +9,15 @@ metadata:
     component: postal
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
+    {{- range $k, $v := .Values.postal.smtp.certManager.labels }}
+    {{$k}}: {{$v | quote}}
+    {{- end }}
 spec:
-  secretName: {{ template "postal.fullname" . }}-smtp-tls
-  issuerRef:
-    name: {{ required "postal.smtp.certManager.issuerName is required" .Values.postal.smtp.certManager.issuerName }}
-    kind: {{ required "postal.smtp.certManager.issuerKind is required" .Values.postal.smtp.certManager.issuerKind }}
   commonName: {{ required "postal.smtp.hostname is required" .Values.postal.smtp.hostname }}
   dnsNames:
   - {{ required "postal.smtp.hostname is required" .Values.postal.smtp.hostname }}
-  acme:
-    config:
-    - http01:
-        ingressClass: {{ .Values.postal.smtp.certManager.ingressClass }}
-      domains:
-      - {{ required "postal.smtp.hostname is required" .Values.postal.smtp.hostname }}
+  issuerRef:
+    name: {{ required "postal.smtp.certManager.issuerName is required" .Values.postal.smtp.certManager.issuerName }}
+    kind: {{ required "postal.smtp.certManager.issuerKind is required" .Values.postal.smtp.certManager.issuerKind }}
+  secretName: {{ template "postal.fullname" . }}-smtp-tls
 {{- end }}
